@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap");
+ul {
+  margin-top: 50px;
+}
+* {
+  font-family: "Roboto Slab", serif !important;
+  /* Add !important to overwrite all elements */
+}
+.navTitle {
+  font-size: 1em !important;
+}
+footer {
+  margin-bottom: -20px !important;
+}
+ngb-modal-window {
+    z-index: 1;
+}

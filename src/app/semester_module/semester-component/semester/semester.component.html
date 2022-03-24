@@ -1,0 +1,118 @@
+<div class="container wrapper" id="semester">
+    <div class="row">
+        <!-- Issue table -->
+        <div class="col-md-12">
+            <div class="inner">
+              <br>
+                <h1 class="text-center">Semester</h1>
+                <button mat-raised-button color="accent" (click) = "open(content)">Create</button>
+                <br>
+                <br>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Semester Name</th>
+                            <th scope="col">Semester Description</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let semester of SemesterList">
+                            <td>{{semester.semesterId}}</td>
+                            <td>{{semester.semesterName}}</td>
+                            <td>{{semester.semesterDesc}}</td>
+                            <td>
+                                <button mat-raised-button color="primary"  (click)="openEdit(contentEdit, semester)">Edit</button> <div class="divider"></div>
+                                
+                                <button mat-raised-button color="warn" (click)="deleteSemester(semester.semesterId)" >Delete</button>
+      
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- create form -->
+
+    
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">NEW SEMESTER</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form [formGroup]="semesterForm" (ngSubmit)="submitForm()" novalidate>
+          <div class="form-group">
+            <label for="semesterName">Semester Name</label>
+            <div class="input-group">
+              <input id="semesterName" formControlName="semesterName"  class="form-control" >
+            </div>
+          </div>
+          <div class="form-group">
+              <label for="semesterDesc">Semester Description</label>
+              <div class="input-group">
+                <input id="semesterDesc" formControlName="semesterDesc" class="form-control" >
+              </div>
+            </div>
+        
+   
+  
+      <div class="modal-footer">
+        <button data-dismiss="modal" class="btn btn-info"  type="submit" (click)="modal.close('Save click')">Submit</button>
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+      </div>
+      </form>
+  </div>
+    </ng-template>
+  
+      <!-- update form -->
+    
+      <ng-template #contentEdit let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">UPDATE SEMESTER</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form #f="ngForm" (ngSubmit)="onEdit(f)" novalidate>
+     
+     
+                <div class="form-group">
+                    <label for="semesterId">Semester Id:</label>
+                    <div class="input-group">
+                        <input [(ngModel)]="editForm.semesterId" id="semesterId" name="semesterId" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="semesterName">Semester Name:</label>
+                    <div class="input-group">
+                        <input id="semesterName" [(ngModel)]="editForm.semesterName" name="semesterName" class="form-control">
+                    </div>
+                </div>
+     
+                <div class="form-group">
+                    <label for="semesterDesc">Semester Description:</label>
+                    <div class="input-group">
+                        <input id="semesterDesc" [(ngModel)]="editForm.semesterDesc" name="semesterDesc" class="form-control">
+                    </div>
+                </div>
+               
+     
+                <div class="modal-footer">
+                    <button type="button" id="add-user-form" (click)="modal.close('Save click')" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                    <!-- <button  (click)="modal.close('Save click')" type="submit" class="btn btn-primary">Save changes</button> -->
+                    <button [disabled]="f.invalid" (click)="modal.close('Save click')" data-dismiss="modal" class="btn btn-primary">Submit</button>
+                </div>
+     
+     
+     
+     
+            </form>
+        </div>
+      </ng-template>

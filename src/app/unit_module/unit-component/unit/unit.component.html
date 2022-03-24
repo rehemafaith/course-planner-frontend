@@ -1,0 +1,174 @@
+<div class="container wrapper" id="unit">
+    <div class="row">
+        <!-- Issue table -->
+        <div class="col-md-12">
+            <div class="inner">
+              <br>
+                <h1 class="text-center">Unit</h1>
+                <button mat-raised-button color="accent" (click)="open(content)">Create</button>
+                <br>
+                <br>
+                <table class="table table-striped"  >
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Unit Name</th>
+                            <th scope="col">Unit Code</th>
+                            <th scope="col">Unit Rank</th>
+                            <th scope="col">Unit Specialization</th>
+                            <th scope="col">Course Name</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let unit of UnitList">
+                            <td>{{unit.unitId}}</td>
+                            <td>{{unit.unitName}}</td>
+                            <td>{{unit.unitCode}}</td>
+                            <td>{{unit.unitRank}}</td>
+                            <td>{{unit.unitSpecialization}}</td>
+                            <td>{{unit.courseName}}</td>
+                            <td>
+                                <button mat-raised-button color="primary" (click)="openEdit(contentEdit, unit)"  >Edit</button> <div class="divider"></div>
+                                
+                                <button mat-raised-button color="warn" (click)="deleteUnit(unit.unitId)">Delete</button>
+      
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+
+ <!-- create form -->
+
+ <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">New Department</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+    <form [formGroup]="unitForm" (ngSubmit)="submitForm()" novalidate>
+        <div class="form-group">
+          <label for="unitName">Unit Name</label>
+          <div class="input-group">
+            <input id="unitName" formControlName="unitName"  class="form-control" >
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="unitCode">Unit Code</label>
+            <div class="input-group">
+              <input id="unitCode" formControlName="unitCode" class="form-control" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="unitRank">Unit Rank</label>
+            <div class="input-group">
+              <input id="unitRank" formControlName="unitRank" class="form-control" >
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="unitSpecialization">Unit Specialization</label>
+            <br>
+            <br>
+            
+                <label for="unitSpecialization">No </label><div class="divider"></div>
+                <input type="radio" formControlName="unitSpecialization" value="N" ><br>
+                <label for="unitSpecialization">Yes</label> <div class="divider"></div>
+                <input type="radio" formControlName="unitSpecialization" value="Y" > 
+            
+          </div>
+      <br><br>
+          <div class="form-group">
+            <label for="unitRank">Course Name:</label>
+            <br>
+            <div class="input-group">
+                <select formControlName="courseName" id="courseName">
+                    <option *ngFor="let unit of UnitList" [value]="unit.unitCourseId">
+                      {{unit.courseName}}
+                    </option>
+                  </select>
+            </div>
+          </div>
+
+    <div class="modal-footer">
+      <button data-dismiss="modal" class="btn btn-info"  type="submit" (click)="modal.close('Save click')">Submit</button>
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    </div>
+    </form>
+</div>
+  </ng-template>
+
+   <!-- update form -->
+    
+   <ng-template #contentEdit let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">UPDATE UNIT</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form #f="ngForm" (ngSubmit)="onEdit(f)" novalidate>
+ 
+ 
+            <div class="form-group">
+                <label for="unitName">Unit Name</label>
+                <div class="input-group">
+                  <input id="unitName" formControlName="unitName"  class="form-control" >
+                </div>
+              </div>
+              <div class="form-group">
+                  <label for="unitCode">Unit Code</label>
+                  <div class="input-group">
+                    <input id="unitCode" formControlName="unitCode" class="form-control" >
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="unitRank">Unit Rank</label>
+                  <div class="input-group">
+                    <input id="unitRank" formControlName="unitRank" class="form-control" >
+                  </div>
+                </div>
+                <br>
+                <div class="form-group">
+                  <label for="unitSpecialization">Unit Specialization</label>
+                  <br>
+                  <br>
+                  
+                      <label for="unitSpecialization">No </label><div class="divider"></div>
+                      <input type="radio" formControlName="unitSpecialization" value="N" ><br>
+                      <label for="unitSpecialization">Yes</label> <div class="divider"></div>
+                      <input type="radio" formControlName="unitSpecialization" value="Y" > 
+                  
+                </div>
+            <br><br>
+                <div class="form-group">
+                  <label for="unitRank">Course Name:</label>
+                  <br>
+                  <div class="input-group">
+                      <select formControlName="courseName" id="courseName">
+                          <option *ngFor="let unit of UnitList" [value]="unit.unitCourseId">
+                            {{unit.courseName}}
+                          </option>
+                        </select>
+                  </div>
+                </div>
+ 
+            <div class="modal-footer">
+                <button type="button" id="add-user-form" (click)="modal.close('Save click')" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                <!-- <button  (click)="modal.close('Save click')" type="submit" class="btn btn-primary">Save changes</button> -->
+                <button [disabled]="f.invalid" (click)="modal.close('Save click')" data-dismiss="modal" class="btn btn-primary">Submit</button>
+            </div>
+ 
+ 
+ 
+ 
+        </form>
+    </div>
+  </ng-template>

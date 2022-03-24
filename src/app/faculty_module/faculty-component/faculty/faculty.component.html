@@ -1,0 +1,118 @@
+<div class="container wrapper" id="faculty">
+    <div class="row">
+        <!-- Issue table -->
+        <div class="col-md-12">
+            <div class="inner">
+              <br>
+                <h1 class="text-center">Faculty</h1>
+                <button mat-raised-button color="accent" (click) = "open(content)">Create</button>
+                <br>
+                <br>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Faculty Name</th>
+                            <th scope="col">Faculty Description</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let faculty of FacultyList">
+                            <td>{{faculty.facultyId}}</td>
+                            <td>{{faculty.facultyName}}</td>
+                            <td>{{faculty.facultyDesc}}</td>
+                            <td>
+                                <button mat-raised-button color="primary"  (click)="openEdit(contentEdit, faculty)">Edit</button> <div class="divider"></div>
+                                
+                                <button mat-raised-button color="warn" (click)="deleteFaculty(faculty.facultyId)" >Delete</button>
+      
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- create form -->
+
+    
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">NEW FACULTY</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form [formGroup]="facultyForm" (ngSubmit)="submitForm()" novalidate>
+          <div class="form-group">
+            <label for="facultyName">Faculty Name</label>
+            <div class="input-group">
+              <input id="facultyName" formControlName="facultyName"  class="form-control" >
+            </div>
+          </div>
+          <div class="form-group">
+              <label for="facultyDesc">Faculty Description</label>
+              <div class="input-group">
+                <input id="facultyDesc" formControlName="facultyDesc" class="form-control" >
+              </div>
+            </div>
+        
+   
+  
+      <div class="modal-footer">
+        <button data-dismiss="modal" class="btn btn-info"  type="submit" (click)="modal.close('Save click')">Submit</button>
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+      </div>
+      </form>
+  </div>
+    </ng-template>
+  
+      <!-- update form -->
+    
+      <ng-template #contentEdit let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">UPDATE FACULTY</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form #f="ngForm" (ngSubmit)="onEdit(f)" novalidate>
+     
+     
+                <div class="form-group">
+                    <label for="facultyId">Faculty Id:</label>
+                    <div class="input-group">
+                        <input [(ngModel)]="editForm.facultyId" id="facultyId" name="facultyId" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="facultyName">Faculty Name:</label>
+                    <div class="input-group">
+                        <input id="facultyName" [(ngModel)]="editForm.facultyName" name="facultyName" class="form-control">
+                    </div>
+                </div>
+     
+                <div class="form-group">
+                    <label for="facultyDesc">Faculty Description:</label>
+                    <div class="input-group">
+                        <input id="facultyDesc" [(ngModel)]="editForm.facultyDesc" name="facultyDesc" class="form-control">
+                    </div>
+                </div>
+               
+     
+                <div class="modal-footer">
+                    <button type="button" id="add-user-form" (click)="modal.close('Save click')" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                    <!-- <button  (click)="modal.close('Save click')" type="submit" class="btn btn-primary">Save changes</button> -->
+                    <button [disabled]="f.invalid" (click)="modal.close('Save click')" data-dismiss="modal" class="btn btn-primary">Submit</button>
+                </div>
+     
+     
+     
+     
+            </form>
+        </div>
+      </ng-template>

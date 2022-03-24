@@ -1,0 +1,111 @@
+<div class="container wrapper" id="planner">
+    <div class="row">
+        <!-- Issue table -->
+        <div class="col-md-12">
+            <div class="inner">
+              <br>
+                <h1 class="text-center">Planner</h1>
+                <button mat-raised-button color="accent" (click)="open(content)">Create</button>
+                <br>
+                <br>
+                <table class="table table-striped"  >
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Semester Name</th>
+                            <th scope="col">Course Name</th>
+                            <th scope="col">Unit Name</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let planner of PlannerList">
+                            <td>{{planner.plannerId}}</td>
+                            <td>{{planner.plannerSemesterName}}</td>
+                            <td>{{planner.plannerCourseName}}</td>
+                            <td>{{planner.plannerUnitName}}</td>
+                            <td>
+                                <button mat-raised-button color="primary" >Edit</button> <div class="divider"></div>
+                                
+                                <button mat-raised-button color="warn" (click)="deletePlanner(planner.plannerId)">Delete</button>
+      
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- create form -->
+
+ <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">NEW</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+    <form [formGroup]="plannerForm" (ngSubmit)="submitForm()" novalidate>
+       
+          
+          <div class="form-group" >
+          
+            <div class="input-group mb-3" style="border-radius: 5px; border: 1px #eee;" >
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Semester</label>
+              </div>
+                <select  class="custom-select"   [(ngModel)]="plannerSemesterId" formControlName="plannerSemesterId" id="plannerSemesterId">
+                    <option *ngFor="let semester of SemesterList" [value]="semester.semesterId">
+                      {{semester.semesterName}}
+                    </option>
+                  </select>
+            </div>
+          </div>
+          <div class="form-group">
+         
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Course</label>
+              </div>
+                <select class="custom-select"  [(ngModel)]="plannerCourseId" formControlName="plannerCourseId" id="plannerCourseId">
+                    <option *ngFor="let course of CourseList" [value]="course.courseId">
+                      {{course.courseName}}
+                    </option>
+                  </select>
+            </div>
+         
+                
+              
+          </div>
+          <div class="form-group">
+            
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Unit</label>
+              </div>
+                <select class="custom-select" [(ngModel)]="plannerUnitId" formControlName="plannerUnitId" id="plannerUnitId">
+                    <option *ngFor="let unit of UnitList" [ngValue]="unit.unitId">
+                      {{unit.unitName}}
+                    </option>
+                  </select>
+            </div>
+         
+                
+              
+          </div>
+          <div class="form-group">
+
+        
+          </div>
+         
+
+    <div class="modal-footer">
+      <button data-dismiss="modal" class="btn btn-info"  type="submit" (click)="modal.close('Save click')">Submit</button>
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    </div>
+    </form>
+</div>
+  </ng-template>
