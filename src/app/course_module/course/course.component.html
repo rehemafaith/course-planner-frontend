@@ -5,22 +5,25 @@
             <div class="inner">
               <br>
                 <h1 class="text-center">Available Courses</h1>
+               
                 <button mat-raised-button color="accent"  (click) = "open(content)">Create</button>
-                <br>
-                <br>
-                <table class="table table-striped">
+                
+                 <input type="text" [(ngModel)]="term" class="form-control" placeholder="Search here" style="width:40%  ;float:right;">
+                  <br>
+                  <br>
+                <table class="table table-striped" >
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                         
                             <th scope="col">Course Name</th>
                             <th scope="col">Course Description</th>
                             <th scope="col">Department</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr *ngFor="let course of CourseList">
-                            <td>{{course.courseId}}</td>
+                    <tbody    >
+                        <tr *ngFor="let course of CourseList |filter:term | paginate: { itemsPerPage: 7, currentPage: p }; let i = index">
+                            
                             <td>{{course.courseName}}</td>
                             <td>{{course.courseDesc}}</td>
                             <td>{{course.courseDepartmentName}}</td>
@@ -32,6 +35,7 @@
                             </td>
                         </tr>
                     </tbody>
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </table>
             </div>
         </div>

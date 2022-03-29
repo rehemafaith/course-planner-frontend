@@ -6,12 +6,13 @@
               <br>
                 <h1 class="text-center">Unit</h1>
                 <button mat-raised-button color="accent" (click)="open(content)">Create</button>
+                <input type="text" [(ngModel)]="term" class="form-control" placeholder="Search here" style="width:40%  ;float:right;">
                 <br>
                 <br>
                 <table class="table table-striped"  >
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                       
                             <th scope="col">Unit Name</th>
                             <th scope="col">Unit Code</th>
                             <th scope="col">Unit Rank</th>
@@ -21,8 +22,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let unit of UnitList">
-                            <td>{{unit.unitId}}</td>
+                        <tr *ngFor="let unit of UnitList|filter:term|paginate: { itemsPerPage: 7, currentPage: p }; let i = index">
+                          
                             <td>{{unit.unitName}}</td>
                             <td>{{unit.unitCode}}</td>
                             <td>{{unit.unitRank}}</td>
@@ -36,6 +37,7 @@
                             </td>
                         </tr>
                     </tbody>
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </table>
             </div>
         </div>

@@ -17,6 +17,8 @@ export class FacultyComponent implements OnInit {
   facultyForm: FormGroup;
   FacultyList: any = [];
   FacultyArr: any = [];
+  term:string;
+  p: number = 1; 
   closeResult: string;
   editForm = {
     facultyId: 0,

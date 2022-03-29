@@ -14,6 +14,8 @@ import { Unit } from '../../unit-service/unit';
 export class UnitComponent implements OnInit {
   unitForm: FormGroup;
   UnitList: any = [];
+  term:string;
+  p: number = 1;
   UnitArr: any = [];
   closeResult: string;
   editForm = {

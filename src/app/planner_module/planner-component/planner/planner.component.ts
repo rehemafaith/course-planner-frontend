@@ -2,7 +2,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup,NgForm} from '@angular/forms';
 import { Router } from '@angular/router';
 import { PlannerService } from '../../planner-service/planner.service';
 import { Planner } from '../../planner-service/planner';
@@ -18,7 +18,9 @@ import { SemesterService  } from 'src/app/semester_module/semester-service/semes
 export class PlannerComponent implements OnInit {
   plannerForm: FormGroup;
   PlannerList: any = [];
+  p: number = 1;
   UnitList: any = [];
+  term:string
   CourseList: any = [];
   SemesterList: any =[];
   plannerUnitId:0;
@@ -127,6 +129,35 @@ export class PlannerComponent implements OnInit {
       this.fetchPlanner();
       
     });
+  }
+  onEdit(f: NgForm) {
+    this.plannerService.updatePlanner(this.editForm).subscribe(
+      (response: Planner) => {
+        this.toastr.success('Success!', 'Planner updated!');
+        this.fetchPlanner();
+        f.reset();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+        f.reset();
+      }
+    );
+  }
+  openEdit(targetModal, planner: Planner) {
+    this.modalService.open(targetModal, {
+      backdrop: 'static',
+      size: 'lg'
+    });
+    
+    this.editForm = planner;
+
+    
+    (<HTMLElement>document.getElementById('plannerCourseId')).setAttribute('selected', (planner.plannerCourseName));
+    // (<HTMLElement>document.getElementById('plannerCourseId')).setAttribute('data-target', (planner.plannerCourseId).toString());
+    // (<HTMLElement>document.getElementById('facultyName')).setAttribute('value', faculty.facultyName);
+    // (<HTMLElement>document.getElementById('facultyDesc')).setAttribute('value', faculty.facultyDesc);
+   
+    
   }
 
 }

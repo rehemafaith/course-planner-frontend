@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Course } from '../course-service/course';
+import { Course } from '../course-service/course'; 
 import { DepartmentService } from 'src/app/department_module/department-service/department.service';
 @Component({
   selector: 'app-course',
@@ -15,9 +15,11 @@ import { DepartmentService } from 'src/app/department_module/department-service/
 export class CourseComponent implements OnInit {
   displayedColumns: string[] = ['courseName', 'courseDesc'];
   courseForm: FormGroup;
+  p: number = 1
   courseDepartmentId :0;
   CourseList: any = [];
   CourseArr: any = [];
+  term:string;
   DepartmentList: any = [];
   datasource = this.CourseList;
   closeResult: string;

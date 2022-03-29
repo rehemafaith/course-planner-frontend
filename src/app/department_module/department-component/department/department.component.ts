@@ -18,6 +18,8 @@ export class DepartmentComponent implements OnInit {
   DepartmentList: any = [];
   FacultyList: any = [];
   departmentFacultyId : 0
+  term:string;
+  p: number = 1;
   // displayedColumns: string[] = ['departmentName', 'departmentDesc', 'Action'];
   // ELEMENT_DATA: Department[] = [];
   // dataSource = new  MatTableDataSource<Department>(this.ELEMENT_DATA);

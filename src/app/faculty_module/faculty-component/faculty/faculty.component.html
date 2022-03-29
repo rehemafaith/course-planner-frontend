@@ -6,20 +6,21 @@
               <br>
                 <h1 class="text-center">Faculty</h1>
                 <button mat-raised-button color="accent" (click) = "open(content)">Create</button>
+                <input type="text" [(ngModel)]="term" class="form-control" placeholder="Search here" style="width:40%  ;float:right;">
                 <br>
                 <br>
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            
                             <th scope="col">Faculty Name</th>
                             <th scope="col">Faculty Description</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let faculty of FacultyList">
-                            <td>{{faculty.facultyId}}</td>
+                        <tr *ngFor="let faculty of FacultyList | filter:term| paginate: { itemsPerPage: 7, currentPage: p }; let i = index">
+                       
                             <td>{{faculty.facultyName}}</td>
                             <td>{{faculty.facultyDesc}}</td>
                             <td>
@@ -30,6 +31,7 @@
                             </td>
                         </tr>
                     </tbody>
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </table>
             </div>
         </div>

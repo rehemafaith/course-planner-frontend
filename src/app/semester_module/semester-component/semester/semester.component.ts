@@ -16,6 +16,8 @@ export class SemesterComponent implements OnInit {
   semesterForm: FormGroup;
   SemesterList: any = [];
   SemesterArr: any = [];
+  term: string;
+  p : number = 1
   closeResult: string;
   editForm = {
     semesterId: 0,

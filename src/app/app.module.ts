@@ -16,6 +16,11 @@ import { FacultyComponent } from './faculty_module/faculty-component/faculty/fac
 import { SemesterComponent } from './semester_module/semester-component/semester/semester.component';
 import { UnitComponent } from './unit_module/unit-component/unit/unit.component';
 import { PlannerComponent } from './planner_module/planner-component/planner/planner.component';
+import { LoginComponentComponent } from './login_module/login-component/login-component.component';
+import { SignupComponentComponent } from './login_module/signup-component/signup-component.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter'; 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +29,10 @@ import { PlannerComponent } from './planner_module/planner-component/planner/pla
     FacultyComponent,
     SemesterComponent,
     UnitComponent,
-    PlannerComponent
+    PlannerComponent,
+    LoginComponentComponent,
+    SignupComponentComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -36,7 +44,9 @@ import { PlannerComponent } from './planner_module/planner-component/planner/pla
     MatButtonModule,
     MatSelectModule,
     NgbModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    Ng2SearchPipeModule,
+    NgxPaginationModule
 
   ],
   providers: [],
